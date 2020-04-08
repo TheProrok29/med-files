@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/TheProrok29/med-files.svg?branch=master)](https://travis-ci.org/TheProrok29/med-files) [![codecov](https://codecov.io/gh/TheProrok29/med-files/branch/master/graph/badge.svg)](https://codecov.io/gh/TheProrok29/med-files) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/TheProrok29/med-files?color=red) ![GitHub](https://img.shields.io/github/license/TheProrok29/med-files)
+
+
+
 ## Med-Files
 
 This is the application to collect and archive personal medical data. This is a front-end part which will be created using React, TypeScript and Sass.

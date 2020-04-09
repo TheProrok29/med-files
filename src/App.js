@@ -1,35 +1,8 @@
 import React, { Component } from "react";
 import Modal from "./components/Modal";
-const medicineItems = [
-  {
-    id: 1,
-    name: "Gripex",
-    description: "Best ever",
-    med_form: "Ointment",
-    med_type: "Antybiotic"
-  },
-  {
-    id: 2,
-    name: "Apap",
-    description: "Painkiller",
-    med_form: "Ointment",
-    med_type: "Antybiotic"
-  },
-  {
-    id: 3,
-    name: "ClearSKy",
-    description: "For eye",
-    med_form: "Ointment",
-    med_type: "Antybiotic"
-  },
-  {
-    id: 4,
-    name: "WindWear",
-    description: "Best probiotic for rain",
-    med_form: "Ointment",
-    med_type: "Probiotic"
-  }
-];
+import axios from "axios"
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -41,18 +14,38 @@ class App extends Component {
         med_form: "",
         med_type: ""
       },
-      medicineList: medicineItems
+      medicineList: []
     };
   }
+  componentDidMount() {
+    this.refreshList();
+  }
+  refreshList = () => {
+    axios
+      .get("/api/medicines/")
+      .then(res => this.setState({ medicineList: res.data }))
+      .catch(err => console.log(err));
+  };
   toggle = () => {
     this.setState({ modal: !this.state.modal });
   };
   handleSubmit = item => {
     this.toggle();
-    alert("save" + JSON.stringify(item));
+    if (item.id) {
+      axios
+        .put(`/api/medicines/${item.id}/`, item)
+        .then(res => this.refreshList());
+      return;
+    }
+    axios
+      .post(`/api/medicines/`, item)
+      .then(res => this.refreshList());
+    return;
   };
   handleDelete = item => {
-    alert("delete" + JSON.stringify(item));
+    axios
+      .delete(`/api/medicines/${item.id}`)
+      .then(res => this.refreshList());
   };
   createItem = () => {
     const item = { name: "", description: "", med_form: "", med_type: "" };

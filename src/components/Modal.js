@@ -39,9 +39,9 @@ export default class CustomModal extends Component {
                             <Input
                                 type="text"
                                 name="name"
-                                value={this.state.activeItem.title}
+                                value={this.state.activeItem.name}
                                 onChange={this.handleChange}
-                                placeholder="Enter Medicine Name"
+                                placeholder="Enter Medicine NAME"
                             />
                         </FormGroup>
                         <FormGroup>
